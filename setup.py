@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name="pymusician27",
-      version="0.0.0-b",
+      version="0.0.3-b",
       description="A python package for music composition and analysis.",
       long_description="""
       Read the README here:
@@ -16,7 +16,7 @@ setup(name="pymusician27",
       author="Scott Morse",
       author_email="scottmorsedev@gmail.com",
       license="Apache",
-      packages=["pymusician27"],
+      packages=["pymusician27","pymusician27._modules"],
       include_package_data=True,
       install_requires=[
           'numpy',

@@ -285,5 +285,3 @@ def note_minus_intvl(note_obj,intvl_obj):
     return new_note
 
 trip = _Note('E',2,'3t')
-
-print(trip._rhythm)

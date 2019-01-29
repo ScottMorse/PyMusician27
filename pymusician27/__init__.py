@@ -1,6 +1,6 @@
 from pymusician27._modules import _note, _interval, _mode, _chord, _timesignature
 
-VERSION = "0.0.0-b"
+VERSION = "0.0.3-b"
 
 class A4:
 
