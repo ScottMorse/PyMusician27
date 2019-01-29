@@ -18,6 +18,9 @@ RHYTHM_NAMES = {
     1: "512th"
 }
 
+RHYTHM_NAMES_KEYS = list(RHYTHM_NAMES.keys())
+RHYTHM_NAMES_KEYS.sort(reverse=True)
+
 class _TimeSignature(object):
 
     def __init__(self,top_number,bottom_number):
@@ -32,8 +35,8 @@ class _TimeSignature(object):
         self._top = top_number
         self._bottom = bottom_number
 
-        self._beat_len = tuple(RHYTHM_NAMES.keys())[int(log2(bottom_number)) + 1]
-        print(RHYTHM_NAMES.keys())
+
+        self._beat_len = RHYTHM_NAMES_KEYS[int(log2(bottom_number)) + 1]
 
         self._gets_beat = RHYTHM_NAMES[self._beat_len]
 

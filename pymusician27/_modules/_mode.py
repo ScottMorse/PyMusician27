@@ -1,13 +1,44 @@
-import json
-import os
+MODES = {
+    "ionian": [2,2,1,2,2,2,1],
+    "major": "ionian1",
+    "dorian": "ionian2",
+    "phrygian": "ionian3",
+    "lydian": "ionian4",
+    "mixolydian": "ionian5",
+    "aeolian": "ionian6",
+    "minor": "ionian6",
+    "locrian": "ionian7",
+    "major pentatonic": [2,2,3,2,3],
+    "minor pentatonic": "major pentatonic5",
+    "major blues": [2,1,1,3,2,3],
+    "minor blues": "major blues6",
+    "blues": "major blues6",
+    "harmonic minor": [2,1,2,2,1,3,1],
+    "melodic minor": [2,1,2,2,2,2,1],
+    "dorian flat 2": "melodic minor2",
+    "lydian sharp 5": "melodic minor3",
+    "lydian dominant": "melodic minor4",
+    "mixolydian flat 6": "melodic minor5",
+    "locrian sharp 2": "melodic minor6",
+    "super locrian": "melodic minor7",
+    "altered": "melodic minor7",
+    "chromatic": [1,1,1,1,1,1,1,1,1,1,1,1],
+    "whole tone": [2,2,2,2,2,2],
+    "whole-half diminished": [2,1,2,1,2,1,2,1],
+    "half-whole diminished": [1,2,1,2,1,2,1,2],
+    "whole-half octatonic": "whole-half diminished1",
+    "half-whole octatonic": "half-whole diminished1",
+    "augmented": [3,1,3,1,3,1]
+  }
 
-BASE_DIR = os.path.dirname(__file__)
-FILE_PATH = os.path.join(BASE_DIR,"../data/modes.json")
-with open(FILE_PATH) as j:
-    loaded = json.load(j)
-
-MODES = loaded[0]
-MODE_LETTER_SPELLINGS = loaded[1]
+MODE_LETTER_SPELLINGS = {
+    "ionian": [1,1,1,1,1,1,1],
+    "major pentatonic": [1,1,2,1,2],
+    "major blues": [1,0,1,2,1,2],
+    "harmonic minor": [1,1,1,1,1,1,1],
+    "melodic minor": [1,1,1,1,1,1,1],
+    "augmented": [1,1,2,0,2,1]
+}
 
 class _Mode(object):
 

@@ -8,6 +8,9 @@ NOTE_VALUES = {
     "G": (4,7), "A": (5,9),
     "B": (6,11),
 }
+
+NOTE_VALUES_KEYS = ['C','D','E','F','G','A','B']
+
 RHYTHM_REGEX = r'^(10|[0-9])[\.]*[t]?$'
 RHYTHM_VALUES = [
     1024,512,256,128,
@@ -79,10 +82,10 @@ class Rhythm:
             if dots:
                 original_value = value
                 for i in range(dots):
-                    value += original_value/(2**(i + 1))
+                    value += original_value/(2.0**(i + 1))
             
             if triplet:
-                value *= (2/3)
+                value *= 2.0 / 3
 
         else:
             num = int(flags[0])
@@ -176,7 +179,7 @@ def note_name_from_values(letter,pitch):
         raise ValueError("Letter argument should be an integer between 0 and 6, 0 for C, 1 for B, etc.")
     if pitch not in range(12):
         raise ValueError("Pitch argument should be an integer between 0 and 11, 0 for C natural (or equivalent), 1 for C#/Db, etc.")
-    letter_str = tuple(NOTE_VALUES.keys())[letter]
+    letter_str = NOTE_VALUES_KEYS[letter]
     expected_pitch = NOTE_VALUES[letter_str][1]
     pitch_offset = pitch - expected_pitch
     if pitch_offset > 5:
@@ -199,14 +202,14 @@ def note_names_from_hard_pitch(hard_pitch,prefer=None):
     octave = hard_pitch // 12
     pitch = hard_pitch % 12
     index = 0
-    for note_key in NOTE_VALUES:
+    for note_key in NOTE_VALUES_KEYS:
         if pitch == NOTE_VALUES[note_key][1]:
             return (note_key,octave)
         if pitch == NOTE_VALUES[note_key][1] + 1:
             if prefer == "b":
                 if index == 6:
                     index = -1
-                return (tuple(NOTE_VALUES.keys())[index + 1] + "b",octave)
+                return (NOTE_VALUES_KEYS[index + 1] + "b",octave)
             return (note_key + "#",octave)
         index += 1
 
@@ -221,7 +224,7 @@ def note_names_from_frequency(Hz,prefer=None):
         raise ValueError("Please provide a positive number for the Hz value.")
     if prefer not in ("#","b",None):
         raise ValueError("'prefer' parameter should be set to '#' or 'b'.")
-    return note_names_from_hard_pitch(int(round(12 * (log2(Hz) - log2(A4.getA4()))) + 57),prefer)
+    return note_names_from_hard_pitch(int(round(12.0 * (log2(Hz * 1.0) - log2(A4.getA4()))) + 57),prefer)
 
 #Returns a note object that is a supplied interval up from the supplied note
 #Does not need an octave, but will supply the accurate octave-level of the new note if provided
@@ -248,7 +251,6 @@ def note_plus_intvl(note_obj,intvl_obj):
         new_note = Note.from_values(letter,pitch)
 
     if note_obj.rhythm:
-        print(note_obj.rhythm)
         new_note.rhythm = note_obj.rhythm.flags
 
     return new_note
@@ -278,7 +280,10 @@ def note_minus_intvl(note_obj,intvl_obj):
         new_note = Note.from_values(letter,pitch)
 
     if note_obj.rhythm:
-        print(note_obj.rhythm)
         new_note.rhythm = note_obj.rhythm.flags
 
     return new_note
+
+trip = _Note('E',2,'3t')
+
+print(trip._rhythm)

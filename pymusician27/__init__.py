@@ -4,7 +4,7 @@ VERSION = "0.0.0-b"
 
 class A4:
 
-    __A4 = 440
+    __A4 = 440.0
 
     @staticmethod
     def getA4():
@@ -80,7 +80,7 @@ class Note(_note._Note):
         if self.octave == None:
             return None
         offset = self.hard_pitch - 57
-        return A4.getA4() * 2**(offset / 12)
+        return A4.getA4() * 2.0**(offset / 12.0)
 
     #method which returns a new Note object which is enharmonic to the current one
     #prefer can be set to '#' or 'b' to force preference of sign
