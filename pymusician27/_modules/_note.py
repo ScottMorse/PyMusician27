@@ -17,7 +17,7 @@ RHYTHM_VALUES = [
 GROSS_ROOTS = {"B":"Cb","C":"B#","E":"Fb","F":"E#"}
 NON_NATURAL = (1,3,6,8,10)
 
-class _Note:
+class _Note(object):
 
     def __init__(self,name,octave=None,rhythm=None,dots=None,triplet=None):
         name = name.strip().capitalize()
@@ -95,7 +95,7 @@ class Rhythm:
         self.flags = flags
 
     def __repr__(self):
-        return f"<Rhythm object {self.flags} val:{round(self.value,2)}>"
+        return "<Rhythm object {} val:{}>".format(self.flags,round(self.value,2))
 
 #assigns pitch integer value to a Note based on it's name
 def pitch_from_name(name):
@@ -113,7 +113,7 @@ def pitch_from_name(name):
 
 #returns new Note object enharmonic to the old
 def enharmonic(note_obj,prefer=None,gross=False):
-    from pymusician import Note
+    from pymusician27 import Note
 
     if prefer:
         if prefer not in ("#","b"):
@@ -213,7 +213,7 @@ def note_names_from_hard_pitch(hard_pitch,prefer=None):
 #Used as a static mehtod by the note class to instantiate a Note from a Hertz value
 #This returns only the string name of the note
 def note_names_from_frequency(Hz,prefer=None):
-    from pymusician import A4
+    from pymusician27 import A4
 
     if type(Hz) is not int and type(Hz) is not float:
             raise ValueError("Please provide a positive number for the Hz value.")
@@ -226,7 +226,7 @@ def note_names_from_frequency(Hz,prefer=None):
 #Returns a note object that is a supplied interval up from the supplied note
 #Does not need an octave, but will supply the accurate octave-level of the new note if provided
 def note_plus_intvl(note_obj,intvl_obj):
-    from pymusician import Note,Interval
+    from pymusician27 import Note,Interval
 
     if not isinstance(intvl_obj,Interval):
         raise ValueError("Intervals can only be added to Note objects.")
@@ -256,7 +256,7 @@ def note_plus_intvl(note_obj,intvl_obj):
 #Returns a note object that is a supplied interval down from the supplied note
 #Does not need an octave, but will supply the accurate octave-level of the new note if provided
 def note_minus_intvl(note_obj,intvl_obj):
-    from pymusician import Note, Interval
+    from pymusician27 import Note, Interval
 
     if not isinstance(intvl_obj,Interval):
             raise ValueError("Intervals can only be added to Note objects.")

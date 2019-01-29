@@ -1,6 +1,6 @@
-from pymusician._modules import _note, _interval, _mode, _chord, _timesignature
+from pymusician27._modules import _note, _interval, _mode, _chord, _timesignature
 
-VERSION = "1.1.1"
+VERSION = "0.0.0-b"
 
 class A4:
 
@@ -21,7 +21,7 @@ class A4:
 class Note(_note._Note):
 
     def __init__(self,name,octave=None,rhythm=None,dots=None,triplet=None):
-        super().__init__(name,octave,rhythm,dots,triplet)
+        super(Note,self).__init__(name,octave,rhythm,dots,triplet)
 
     #string (A#, Bb, C, etc.)
     @property
@@ -100,19 +100,19 @@ class Note(_note._Note):
     #prefer set to '#' or 'b' forces accidental
     @staticmethod
     def from_hard_pitch(hard_pitch,prefer=None,rhythm=None):
-        return Note(*_note.note_names_from_hard_pitch(hard_pitch,prefer),rhythm)
+        return Note(*_note.note_names_from_hard_pitch(hard_pitch,prefer),rhythm=rhythm)
 
     #Instantiates a Note object from letter and pitch value
     #Optional rhythm
     #prefer set to '#' or 'b' forces accidental
     @staticmethod
     def from_frequency(Hz,prefer=None,rhythm=None):
-        return Note(*_note.note_names_from_frequency(Hz,prefer),rhythm)
+        return Note(*_note.note_names_from_frequency(Hz,prefer),rhythm=rhythm)
 
     def __repr__(self):
-        rep = f'<Note {self.name}{str(self.octave if self.octave != None else "")}'
+        rep = '<Note {}{}'.format(self.name,str(self.octave if self.octave != None else ""))
         if self.rhythm:
-            rep += f'{":" + self.rhythm.flags}'
+            rep += ":" + self.rhythm.flags
         return rep + '>'
 
     #Allows the addition of a Note object plus an Interval object to return a new Note
@@ -126,7 +126,7 @@ class Note(_note._Note):
 class Interval(_interval._Interval):
 
     def __init__(self,flags,displace=0):
-        super().__init__(flags,displace)
+        super(Interval,self).__init__(flags,displace)
     
     #int representing the distance in pitch of the interval
     @property
@@ -149,13 +149,13 @@ class Interval(_interval._Interval):
         return _interval.intvl_from_notes(note_obj1,note_obj2)
 
     def __repr__(self):
-        return f'<Interval {self.name}>'
+        return '<Interval {}>'.format(self.name)
 
 class Mode(_mode._Mode):
 
     #can be initialized with a string or Note object root
     def __init__(self,root,mode):
-        super().__init__(root,mode)
+        super(Mode,self).__init__(root,mode)
 
     #A Note object
     @property
@@ -190,13 +190,13 @@ class Mode(_mode._Mode):
         return self.spelling[key]
 
     def __repr__(self):
-        return f"<Mode {self.name}>"
+        return "<Mode {}>".format(self.name)
 
 class Chord(_chord._Chord):
 
     #Initialized with a string chord symbol
     def __init__(self,symbol):
-        super().__init__(symbol)
+        super(Chord,self).__init__(symbol)
     
     #The original symbol
     @property
@@ -239,13 +239,13 @@ class Chord(_chord._Chord):
         return self.spelling[key]
 
     def __repr__(self):
-        return f"<Chord {self.symbol}>"
+        return "<Chord {}>".format(self.symbol)
 
 class TimeSignature(_timesignature._TimeSignature):
 
     #intialized with the two numbers as seen on sheet music: (4,4) for common time, (3,4) for waltz
     def __init__(self,top_number,bottom_number):
-        super().__init__(top_number,bottom_number)
+        super(TimeSignature,self).__init__(top_number,bottom_number)
 
     #numeric
     @property
@@ -271,3 +271,6 @@ class TimeSignature(_timesignature._TimeSignature):
     @property
     def measure_len(self):
         return self._measure_len
+    
+    def __repr__(self):
+        return "<TimeSignature {}/{}>".format(self.top_number,self.bottom_number)

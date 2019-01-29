@@ -9,10 +9,10 @@ with open(FILE_PATH) as j:
 MODES = loaded[0]
 MODE_LETTER_SPELLINGS = loaded[1]
 
-class _Mode:
+class _Mode(object):
 
     def __init__(self,root,mode):
-        from pymusician import Note
+        from pymusician27 import Note
         if root.__class__.__name__ == "Note":
             self._root = root
         else:
@@ -28,7 +28,7 @@ class _Mode:
 
 #returns a tuple of Note objects for the given mode
 def mode_speller(root,mode):
-    from pymusician import Note
+    from pymusician27 import Note
 
     spelling = [root]
 

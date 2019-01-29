@@ -1,5 +1,5 @@
 import unittest
-import pymusician as pm
+import pymusician27 as pm
 
 class TestIntervalClass(unittest.TestCase):
 

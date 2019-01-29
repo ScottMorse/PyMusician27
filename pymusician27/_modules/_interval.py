@@ -11,7 +11,7 @@ INTVLS = {
 
 INTVL_NAMES = ("unison","2nd","3rd","4th","5th","6th","7th","octave")
 
-class _Interval:
+class _Interval(object):
 
     def __init__(self,flags,displace=0):
         flags = flags.strip()
@@ -66,7 +66,7 @@ def intvl_diff(flags,_displace):
 #Returns a string name
 def intvl_namer(intvl):
     if intvl._flags[-1] == "1" and intvl._flags[0].lower() == "p" and intvl._displace > 1 and len(intvl._flags) == 2:
-        return f"{intvl._displace} octaves"
+        return "{} octaves".format(intvl._displace)
     if intvl._displace == 1:
         if intvl._flags[-1] == "1":
             base = "octave"
@@ -85,16 +85,16 @@ def intvl_namer(intvl):
     else:
         quality = "Diminished"
     if len(intvl._flags) > 2:
-        times = f"(x{len(intvl._flags) - 1})"
+        times = "(x{})".format(len(intvl._flags) - 1)
     else:
         times = ""
     name = quality + times + " " + base
     if intvl._displace > 1:
-        name += f" plus {intvl._displace} octaves"
+        name += " plus {} octaves".format(intvl._displace)
     return name
 
 def intvl_from_notes(note_obj1,note_obj2):
-    from pymusician import Interval, Note
+    from pymusician27 import Interval, Note
 
     if type(note_obj1) is not Note or type(note_obj2) is not Note:
         raise ValueError("Invalid Note object passed.")

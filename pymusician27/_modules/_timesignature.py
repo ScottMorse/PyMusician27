@@ -18,7 +18,7 @@ RHYTHM_NAMES = {
     1: "512th"
 }
 
-class _TimeSignature:
+class _TimeSignature(object):
 
     def __init__(self,top_number,bottom_number):
         if not (isinstance(top_number,(int,float)) and
@@ -33,6 +33,7 @@ class _TimeSignature:
         self._bottom = bottom_number
 
         self._beat_len = tuple(RHYTHM_NAMES.keys())[int(log2(bottom_number)) + 1]
+        print(RHYTHM_NAMES.keys())
 
         self._gets_beat = RHYTHM_NAMES[self._beat_len]
 

@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*- 
+
 import unittest
-import pymusician as pm
+import pymusician27 as pm
 
 class TestChordClass(unittest.TestCase):
 

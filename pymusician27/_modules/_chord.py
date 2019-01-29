@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*- 
+
 import re
 
-class _Chord:
+class _Chord(object):
 
     def __init__(self,symbol):
-        from pymusician import Note, Interval
+        from pymusician27 import Note, Interval
 
         self._symbol = symbol
 
@@ -203,8 +205,8 @@ def parse_symbol(symbol):
     return data
 
 #! TODO
-def chord_from_notes(*notes,root=None):
-    from pymusician import Note
+def chord_from_notes(notes,root=False):
+    from pymusician27 import Note, Interval
 
     notes = list(notes)
     #root can be provided or by default is first note provided
